@@ -1,0 +1,26 @@
+name = "dms-worker"
+main = "src/index.ts"
+compatibility_date = "2024-05-29"
+compatibility_flags = ["nodejs_compat"]
+
+# ── D1 Database ──────────────────────────────────────────────────────────────
+[[d1_databases]]
+binding = "DB"
+database_name = "DMS_DB"
+database_id = "local-dms-db"
+
+# ── R2 Bucket ────────────────────────────────────────────────────────────────
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "dms-imports"
+
+# ── Environment Variables ────────────────────────────────────────────────────
+[vars]
+JWT_SECRET = "local-dev-secret-change-in-production"
+CORS_ORIGIN = "http://localhost:3000"
+
+# ── Local Dev ────────────────────────────────────────────────────────────────
+[env.local]
+[env.local.vars]
+JWT_SECRET = "local-dev-secret-change-in-production"
+CORS_ORIGIN = "http://localhost:3000"

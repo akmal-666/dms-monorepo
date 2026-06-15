@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* CRMi Inspired Light Theme */
+    --background: 220 33% 97%;
+    --foreground: 224 71% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
+    
+    /* Deep Purple / Violet Accent (#7047eb) */
+    --primary: 253 80% 60%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 39% 10%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 253 80% 60%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 253 80% 60%;
+    --radius: 0.75rem;
+
+    /* Custom semantic */
+    --success: 142 71% 45%;
+    --warning: 38 92% 50%;
+    --danger: 0 84% 60%;
+    --info: 199 89% 48%;
+
+    /* Sidebar */
+    --sidebar-bg: 0 0% 100%;
+    --sidebar-border: 220 13% 91%;
+
+    /* Glass effect (Light) */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(220, 220, 230, 0.5);
+  }
+
+  .dark {
+    /* DMS Dark Theme */
+    --background: 222 47% 7%;
+    --foreground: 210 40% 95%;
+    --card: 222 40% 10%;
+    --card-foreground: 210 40% 95%;
+    --popover: 222 40% 10%;
+    --popover-foreground: 210 40% 95%;
+    
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 7%;
+    --secondary: 222 40% 15%;
+    --secondary-foreground: 210 40% 95%;
+    --muted: 222 40% 15%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 222 47% 7%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 222 40% 16%;
+    --input: 222 40% 14%;
+    --ring: 217 91% 60%;
+
+    /* Sidebar */
+    --sidebar-bg: 222 47% 6%;
+    --sidebar-border: 222 40% 14%;
+
+    /* Glass effect (Dark) */
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.08);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer utilities {
+  /* Glass morphism */
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .glass-card {
+    @apply glass rounded-xl shadow-sm;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent dark:from-blue-400 dark:to-cyan-400;
+  }
+
+  /* Status color variants */
+  .status-draft        { @apply text-slate-500 bg-slate-500/10 border-slate-500/20 dark:text-slate-400 dark:bg-slate-400/10 dark:border-slate-400/20; }
+  .status-in-progress  { @apply text-blue-600 bg-blue-600/10 border-blue-600/20 dark:text-blue-400 dark:bg-blue-400/10 dark:border-blue-400/20; }
+  .status-done         { @apply text-emerald-600 bg-emerald-600/10 border-emerald-600/20 dark:text-emerald-400 dark:bg-emerald-400/10 dark:border-emerald-400/20; }
+  .status-overdue      { @apply text-rose-600 bg-rose-600/10 border-rose-600/20 dark:text-red-400 dark:bg-red-400/10 dark:border-red-400/20; }
+  .status-cancelled    { @apply text-zinc-500 bg-zinc-500/10 border-zinc-500/20; }
+
+  /* Card hover */
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-md hover:border-primary/20 hover:-translate-y-0.5;
+  }
+
+  /* Shimmer loader */
+  .shimmer {
+    background: linear-gradient(90deg,
+      hsl(var(--card)) 25%,
+      hsl(var(--secondary)) 50%,
+      hsl(var(--card)) 75%
+    );
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+
+  /* KPI gradient borders */
+  .kpi-border-blue  { border-image: linear-gradient(135deg, #3b82f6, #06b6d4) 1; }
+  .kpi-border-green { border-image: linear-gradient(135deg, #10b981, #84cc16) 1; }
+  .kpi-border-red   { border-image: linear-gradient(135deg, #ef4444, #f97316) 1; }
+  .kpi-border-purple{ border-image: linear-gradient(135deg, #7047eb, #ec4899) 1; }
+
+  /* Glow effects */
+  .glow-blue   { box-shadow: 0 0 20px rgba(59,130,246,0.1); }
+  .glow-green  { box-shadow: 0 0 20px rgba(16,185,129,0.1); }
+  .glow-red    { box-shadow: 0 0 20px rgba(239,68,68,0.1); }
+  .glow-purple { box-shadow: 0 0 20px rgba(112,71,235,0.1); }
+
+  /* Sidebar active item */
+  .sidebar-active {
+    @apply bg-primary/10 text-primary border-r-2 border-primary font-semibold;
+  }
+}
+
+/* ── Custom Recharts overrides ─────────────────────────────────────────────── */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: hsl(var(--border)) !important;
+}
+
+.recharts-text {
+  fill: hsl(var(--muted-foreground)) !important;
+  font-size: 11px !important;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
+}
+
+.recharts-tooltip-label {
+  color: hsl(var(--foreground)) !important;
+  font-weight: 600 !important;
+  margin-bottom: 4px !important;
+}
+
+.recharts-legend-item-text {
+  color: hsl(var(--muted-foreground)) !important;
+  font-size: 11px !important;
+}
+
+/* ── Page transition animations ───────────────────────────────────────────── */
+.page-enter {
+  animation: fade-in 0.25s ease-out forwards;
+}
+
+/* ── Number counter animation ─────────────────────────────────────────────── */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.count-up {
+  animation: count-up 0.4s ease-out forwards;
+}
